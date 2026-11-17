@@ -33,7 +33,8 @@ def main(run_dir: Path) -> int:
             problems.append(f"{name} has changed since the run")
 
     # 2. Raw HTML pages match the hashes stored in the data
-    with open(run_dir / "quotes.csv", encoding="utf-8") as f:
+    data_name = next(n for n in manifest["output_files"] if n != "rejected.csv")
+    with open(run_dir / data_name, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     checked = {}
     for row in rows:
